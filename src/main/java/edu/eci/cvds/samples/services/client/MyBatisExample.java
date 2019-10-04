@@ -20,13 +20,20 @@ package edu.eci.cvds.samples.services.client;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import edu.eci.cvds.sampleprj.dao.mybatis.mappers.ClienteMapper;
+import edu.eci.cvds.sampleprj.dao.mybatis.mappers.ItemMapper;
+import edu.eci.cvds.samples.entities.Item;
+import edu.eci.cvds.samples.entities.TipoItem;
 
 /**
  *
@@ -69,6 +76,14 @@ public class MyBatisExample {
         //ClienteMapper cm=sqlss.getMapper(ClienteMapper.class)
         //cm...
         ClienteMapper cm=sqlss.getMapper(ClienteMapper.class);
+        System.out.println(cm.consultarCliente(4));
+        cm.agregarItemRentadoACliente(4, 1, parseDate("2019-03-12"), parseDate("2019-04-12"));
+        ItemMapper prueba= sqlss.getMapper(ItemMapper.class);
+        TipoItem newTipoItem= new TipoItem(1,"Videojuego");
+        //Item newInsertion= new Item(newTipoItem, 56985, "Prueba", "No se que poner", parseDate("2000-07-29"), 1514854, "hola", "hgfhf");
+        //prueba.insertarItem(newInsertion);
+        //System.out.println(prueba.consultarItems());
+        System.out.println(prueba.consultarItem(56985));
         System.out.println(cm.consultarClientes());
         
         
@@ -79,8 +94,13 @@ public class MyBatisExample {
         sqlss.close();
 
         
-        
     }
 
-
+    public static java.util.Date parseDate(String date) {
+        try {
+            return  new SimpleDateFormat("yyyy-MM-dd").parse(date);
+        } catch (ParseException e) {
+            return null;
+        }
+    }
 }

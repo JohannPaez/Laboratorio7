@@ -69,7 +69,9 @@
 			#{idcli}=c.documento
 			
 	</select>
-	
+	<insert parameterType="map" id="agregarItemRentadoACliente" >
+		insert into VI_ITEMRENTADO(CLIENTES_documento, ITEMS_id, fechainiciorenta, fechafinrenta) values(#{newId}, #{newIdit}, #{newfechainicio}, #{newFechaFin})
+	</insert>
 	
     
 	<resultMap type='ItemRentado' id='ItemRentadoResult'>
@@ -87,7 +89,7 @@
 		<result property='direccion' column='direccion'/>
 		<result property='email' column='email'/>
 		<result property='vetado' column='vetado'/>
-		<collection property='rentados' javaType='ArrayList' ofType='ItemRentado' resultMap='ItemRentadoResult'   >
+		<collection property='rentados' javaType='ArrayList' ofType='ItemRentado' resultMap='ItemRentadoResult'>
 		</collection>
 	</resultMap>
           	
