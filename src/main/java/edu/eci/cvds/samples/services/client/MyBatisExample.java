@@ -82,7 +82,7 @@ public class MyBatisExample {
         TipoItem newTipoItem= new TipoItem(1,"Videojuego");
         //Item newInsertion= new Item(newTipoItem, 56985, "Prueba", "No se que poner", parseDate("2000-07-29"), 1514854, "hola", "hgfhf");
         //prueba.insertarItem(newInsertion);
-        //System.out.println(prueba.consultarItems());
+        System.out.println(prueba.consultarItems());
         System.out.println(prueba.consultarItem(56985));
         System.out.println(cm.consultarClientes());
         
