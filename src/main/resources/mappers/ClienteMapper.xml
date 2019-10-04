@@ -35,27 +35,15 @@
 			left join VI_ITEMS as i on ir.ITEMS_id=i.id 
 			left join VI_TIPOITEM as ti on i.TIPOITEM_id=ti.id  
 	</select>
-	<resultMap type='TipoItem' id='TipoItemResult'>
-		<id property='id' column='id'/>
-		<result property='descripcion' column='descripcion'  />
-	</resultMap>
 	
-	<resultMap type='Item' id='ItemResult'>
-		<id property='id' column='id'/>
-		<result property='nombre' column='nombre'/>
-		<result property='descripcion' column='descripcion'/>
-		<result property='fechalanzamiento' column='fechalanzamiento'/>
-		<result property='tarifaxdia' column='tarifaxdia'/>
-		<result property='formatorenta' column='formatorenta'/>
-		<result property='genero' column='genero'/>
-		<association property='tipo' column='TIPOITEM_id' columnPrefix='tipo_' ></association>
-	</resultMap>
+	
+	
     
 	<resultMap type='ItemRentado' id='ItemRentadoResult'>
 		<id property='id' column='id'/>
 		<result property='fechainiciorenta' column='fechainiciorenta'/>
 		<result property='fechafinrenta' column='fechafinrenta'/>
-		<association property='item' javaType='Item' columnPrefix='item_'></association>
+		<association property='item' javaType='Item' columnPrefix='item_' resultMap='edu.eci.cvds.sampleprj.dao.mybatis.mappers.ItemMapper.ItemResult'></association>
 	</resultMap>
 
 
@@ -66,7 +54,7 @@
 		<result property='direccion' column='direccion'/>
 		<result property='email' column='email'/>
 		<result property='vetado' column='vetado'/>
-		<collection property='rentados' javaType='ArrayList' ofType='ItemRentado' resultMap='ItemRentadoResult'>
+		<collection property='rentados' javaType='ArrayList' ofType='ItemRentado' resultMap='ItemRentadoResult'   >
 		</collection>
 	</resultMap>
           	
