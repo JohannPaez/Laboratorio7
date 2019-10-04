@@ -14,19 +14,20 @@
 			c.email,
 			c.vetado,
 			
-			ir.id ,
-			ir.fechainiciorenta ,
-			ir.fechafinrenta ,
+			ir.id as ItemRentado_id,
+			ir.fechainiciorenta as ItemRentado_fechainiciorenta,
+			ir.fechafinrenta as ItemRentado_fechafinrenta,
 			
-			i.id ,
-			i.nombre ,
-			i.descripcion ,
-			i.fechalanzamiento ,
-			i.tarifaxdia ,
-			i.formatorenta ,
-			i.genero ,        
-			ti.id ,
-			ti.descripcion 
+			i.id as item_id,
+			i.nombre as item_nombre ,
+			i.descripcion as item_descripcion,
+			i.fechalanzamiento as item_fechalanzamiento,
+			i.tarifaxdia as item_tarifaxdia,
+			i.formatorenta as item_formatorenta,
+			i.genero as item_genero,
+			
+			ti.id as tipo_id,
+			ti.descripcion as tipo_descripcion
 
 			
 			FROM VI_CLIENTES as c 
@@ -34,10 +35,11 @@
 			left join VI_ITEMS as i on ir.ITEMS_id=i.id 
 			left join VI_TIPOITEM as ti on i.TIPOITEM_id=ti.id  
 	</select>
-	<resultMap type='TipoIt++em' id='TipoItemResult'>
+	<resultMap type='TipoItem' id='TipoItemResult'>
 		<id property='id' column='id'/>
-		<result property='descripcion' column='descripcion'/>
+		<result property='descripcion' column='descripcion'  />
 	</resultMap>
+	
 	<resultMap type='Item' id='ItemResult'>
 		<id property='id' column='id'/>
 		<result property='nombre' column='nombre'/>
@@ -46,18 +48,18 @@
 		<result property='tarifaxdia' column='tarifaxdia'/>
 		<result property='formatorenta' column='formatorenta'/>
 		<result property='genero' column='genero'/>
-		<association property='tipo' column='TIPOITEM_id' ></association>
+		<association property='tipo' column='TIPOITEM_id' columnPrefix='tipo_' ></association>
 	</resultMap>
     
 	<resultMap type='ItemRentado' id='ItemRentadoResult'>
 		<id property='id' column='id'/>
 		<result property='fechainiciorenta' column='fechainiciorenta'/>
 		<result property='fechafinrenta' column='fechafinrenta'/>
-		<association property='item' javaType='Item' ></association>
+		<association property='item' javaType='Item' columnPrefix='item_'></association>
 	</resultMap>
 
 
-	<resultMap type='Cliente' id='ClienteResult'>
+	<resultMap type='Cliente' id='ClienteResult'>  
 		<id property='documento' column='documento'/>
 		<result property='nombre' column='nombre'/>
 		<result property='telefono' column='telefono'/>
